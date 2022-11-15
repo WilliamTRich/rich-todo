@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    color: #56657F;
+
+    div {
+        height: 45%;
+    }
+
+    .register,
+    .login {
+        font-size: 2rem;
+        width: 35rem;
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 2rem;
+
+        ::placeholder {
+            color: red;
+            opacity: 70%;
+            font-size: .9rem;
+        }
+
+        .regForm {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            input {
+                height: 2.5rem;
+                border-radius: 10px;
+                border: 2px solid black;
+            }
+
+            button {
+                height: 2.5rem;
+                background-color: gray;
+                border: 2px solid black;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+
+}
