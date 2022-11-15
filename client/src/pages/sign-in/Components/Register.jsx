@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
 
 //Contexts
 import { UserContext } from '../../../contexts/UserContext'
@@ -11,11 +13,13 @@ const Register = () => {
 
     const { user, setUser } = useContext(UserContext);
     const [errors, setErrors] = useState([]);
+    const navigate = useNavigate()
 
     const registerUser = user => {
         axios.post('http://localhost:8000/api/register', user)
             .then(res => {
                 setUser(user)
+                navigate('/dashboard')
             })
             .catch(err => {
                 const errorResponse = err.response.data.errors; // Get the errors from err.response.data
