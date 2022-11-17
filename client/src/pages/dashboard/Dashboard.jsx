@@ -1,7 +1,12 @@
 import React, { useContext } from 'react'
+import '../dashboard/Dashboard.scss'
 
 //Context
 import { UserContext } from '../../contexts/UserContext'
+
+//Components
+import { Nav } from './Components/Nav'
+import { Content } from './Components/Content'
 
 const Dashboard = () => {
 
@@ -9,7 +14,8 @@ const Dashboard = () => {
 
     return (
         <div className='container'>
-            <h1>Hello {user.userName}</h1>
+            <Nav />
+            <Content />
         </div>
     )
 }

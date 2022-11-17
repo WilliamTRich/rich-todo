@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-})
+}, { collection: 'users' })
 
 userSchema.virtual('cPassword')
     .get(function () {

@@ -1,5 +1,7 @@
-const User = require('../models/todo.model')
+const User = require('../models/users.model')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 module.exports.registerUser = async (req, res) => {
     const { userName, password, cPassword } = req.body
@@ -31,7 +33,9 @@ module.exports.loginUser = async (req, res) => {
         const userExist = await User.findOne({ userName })
         if (userExist) {
             if (await bcrypt.compare(password, userExist.password)) {
-                return res.json(userExist)
+                const user = { userId: userExist._id }
+                const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+                return res.json({ accessToken })
             } else {
                 return res
                     .status(400)
