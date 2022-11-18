@@ -45,6 +45,8 @@ module.exports.loginUser = async (req, res) => {
                     .json({ errors: [{ message: 'Password is invalid.' }] })
             }
         } else {
+            res.statusMessage = "Hey there! We got an error!";
+            res.statusMessage += "A new message";
             return res
                 .status(400)
                 .json({ errors: [{ message: 'Username does not exist.' }] })
