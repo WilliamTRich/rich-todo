@@ -3,6 +3,9 @@ const userController = require('../controllers/users.controller')
 const taskController = require('../controllers/tasks.controller')
 
 module.exports = app => {
+    // Validate user
+    app.get( '/api/validate', userController.validateToken );
+
     //Users
     app.post('/api/register', userController.registerUser)
     app.post('/api/login', userController.loginUser)

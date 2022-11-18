@@ -57,22 +57,15 @@ const Tasks = () => {
     const [loaded, setLoaded] = useState(false)
     const { user, setUser } = useContext(UserContext)
 
-    useEffect(() => {
-        axios.post('http://localhost:8000/api/user', { userName: user.userName })
-            .then(res => {
-                setUser(res.data)
-            })
-            .catch(err => console.log(err))
-    }, [])
 
     useEffect(() => {
-        axios.post('http://localhost:8000/api/gettasks', { userId: user._id })
+        axios.post('http://localhost:8000/api/gettasks', { userId: user.userId })
             .then(res => {
                 setTasks(res.data)
                 setLoaded(true)
             })
             .catch(err => console.log(err))
-    }, [loaded])
+    }, [user])
 
     const onClickHandler = id => {
         axios.delete(`http://localhost:8000/api/task/delete/${id}`)
@@ -82,7 +75,7 @@ const Tasks = () => {
             .catch(err => console.log(err))
     }
 
-    if (loaded) {
+    if (user) {
         return (
             <div className='tasks'>
                 {header ? <TaskHeader headerState={[header, setHeader]} loadedState={[loaded, setLoaded]} />
@@ -94,6 +87,9 @@ const Tasks = () => {
                 </ul>
             </div>
         )
+    }
+    else{
+        return (<h2> Loading</h2>)
     }
 }
 

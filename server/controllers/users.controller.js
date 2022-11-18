@@ -1,6 +1,7 @@
 const User = require('../models/users.model')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
 require('dotenv').config()
 
 module.exports.registerUser = async (req, res) => {
@@ -33,9 +34,11 @@ module.exports.loginUser = async (req, res) => {
         const userExist = await User.findOne({ userName })
         if (userExist) {
             if (await bcrypt.compare(password, userExist.password)) {
-                const user = { userId: userExist._id }
+                const user = { userId: userExist._id,
+                               userName }
                 const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-                return res.json({ accessToken })
+                return res.json({ accessToken, 
+                                  userId : userExist._id })
             } else {
                 return res
                     .status(400)
@@ -68,4 +71,18 @@ module.exports.deleteUser = (req, res) => {
     User.deleteOne({ _id: req.params.id })
         .then(result => res.json(result))
         .catch(err => res.status(400).json(err))
+}
+
+module.exports.validateToken = (req, res) => {
+    console.log( req.headers );
+    jwt.verify( req.headers.something, process.env.ACCESS_TOKEN_SECRET, ( err, decoded ) => {
+        console.log( "Error" , err )
+        if( !err ){
+            res.status(200).json( {decoded} );
+        }
+        else{
+            res.status( 401 ).json( "Invalid user" );
+        }
+        
+    });
 }

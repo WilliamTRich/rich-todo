@@ -18,7 +18,9 @@ const LogIn = () => {
     const loginUser = user => {
         axios.post('http://localhost:8000/api/login', user)
             .then(res => {
-                setUser({ userName: user.userName })
+                localStorage.setItem( "token", res.data.accessToken );
+                setUser({ userName: user.userName, 
+                          userId: res.data.userId })
                 navigate('/dashboard')
             })
             .catch(err => {

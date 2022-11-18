@@ -14,10 +14,18 @@ const Nav = () => {
     }
 
     return (
-        <div className='nav'>
-            <h2>{user.userName}</h2>
-            <button onClick={clickHandler}>Log Out</button>
-        </div>
+        (user) ?
+            (<div className='nav'>
+                <h2>{user.userName}</h2>
+                <button onClick={clickHandler}>Log Out</button>
+            </div>)
+            :
+            (
+                <h2>
+                    loading
+                </h2>
+            )
+
     )
 }
 
