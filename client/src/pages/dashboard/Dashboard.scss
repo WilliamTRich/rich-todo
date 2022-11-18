@@ -55,13 +55,51 @@
                     justify-content: space-between;
                     flex: 1;
 
-                    .link {
+                    button {
                         display: flex;
                         justify-content: center;
                         align-items: center;
                         border: 2px solid black;
                         font-weight: normal;
                         height: 2.5rem;
+                        text-decoration: none;
+                        color: black;
+                        width: 7rem;
+                        background-color: gray;
+                        border-radius: 10px;
+                        cursor: pointer;
+                    }
+                }
+
+                .create-task {
+                    display: flex;
+                    font-size: 1.5rem;
+                    padding: 0 3%;
+                    color: #AFBDD1;
+                    font-weight: bold;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex: 1;
+
+                    input {
+                        height: 2.5rem;
+                        width: 30rem;
+                        background-color: #212936;
+                        border: 2px solid black;
+                        color: #AFBDD1;
+                        border-radius: 10px;
+                        font-size: 1.5rem;
+                        padding: .5rem;
+                    }
+
+                    button {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: 2px solid black;
+                        font-weight: 800;
+                        font-size: 2rem;
+                        height: 2.7rem;
                         text-decoration: none;
                         color: black;
                         width: 7rem;
@@ -79,7 +117,7 @@
                     align-items: center;
                     gap: 5px;
                     flex: 4;
-                    padding: 0;
+                    padding: 0 1.3rem;
 
                     li {
                         display: flex;

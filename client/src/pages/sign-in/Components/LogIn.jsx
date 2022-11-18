@@ -18,7 +18,7 @@ const LogIn = () => {
     const loginUser = user => {
         axios.post('http://localhost:8000/api/login', user)
             .then(res => {
-                setUser(user)
+                setUser({ userName: user.userName })
                 navigate('/dashboard')
             })
             .catch(err => {

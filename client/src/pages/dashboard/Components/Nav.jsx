@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom'
+
+//Contexts
+import { UserContext } from '../../../contexts/UserContext'
 
 const Nav = () => {
 
+    const { user, setUser } = useContext(UserContext)
+    const navigate = useNavigate()
+
+    const clickHandler = () => {
+        navigate('/')
+    }
+
     return (
         <div className='nav'>
-            <h2>Username</h2>
-            <button>Log Out</button>
+            <h2>{user.userName}</h2>
+            <button onClick={clickHandler}>Log Out</button>
         </div>
     )
 }

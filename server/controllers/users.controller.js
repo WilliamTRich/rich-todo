@@ -57,6 +57,13 @@ module.exports.findUsers = (req, res) => {
         .catch(err => res.status(400).json(err))
 }
 
+module.exports.findUser = (req, res) => {
+    const { userName } = req.body
+    User.findOne({ userName })
+        .then(user => res.json(user))
+        .catch(err => console.log(err))
+}
+
 module.exports.deleteUser = (req, res) => {
     User.deleteOne({ _id: req.params.id })
         .then(result => res.json(result))
