@@ -18,7 +18,11 @@ const Register = () => {
     const registerUser = user => {
         axios.post('http://localhost:8000/api/register', user)
             .then(res => {
-                setUser({ userName: user.userName })
+                localStorage.setItem('token', res.data.accessToken)
+                setUser({
+                    userName: res.data.userName,
+                    userId: res.data.userId
+                })
                 navigate('/dashboard')
             })
             .catch(err => {
