@@ -13,7 +13,7 @@ const CreateTask = props => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        const userId = user._id
+        const userId = user.userId
 
         axios.post('http://localhost:8000/api/create', { task, userId })
             .then(res => {
@@ -61,11 +61,12 @@ const Tasks = () => {
     useEffect(() => {
         axios.post('http://localhost:8000/api/gettasks', { userId: user.userId })
             .then(res => {
+                console.log(res)
                 setTasks(res.data)
                 setLoaded(true)
             })
             .catch(err => console.log(err))
-    }, [user])
+    }, [loaded])
 
     const onClickHandler = id => {
         axios.delete(`http://localhost:8000/api/task/delete/${id}`)
@@ -75,7 +76,7 @@ const Tasks = () => {
             .catch(err => console.log(err))
     }
 
-    if (user) {
+    if (loaded) {
         return (
             <div className='tasks'>
                 {header ? <TaskHeader headerState={[header, setHeader]} loadedState={[loaded, setLoaded]} />
@@ -88,7 +89,7 @@ const Tasks = () => {
             </div>
         )
     }
-    else{
+    else {
         return (<h2> Loading</h2>)
     }
 }

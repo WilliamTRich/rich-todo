@@ -1,7 +1,9 @@
-import { useState, createContext, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import { UserContext } from './contexts/UserContext'
 import axios from 'axios';
+
+//Contexts
+import { UserContext } from './contexts/UserContext'
 
 //Pages
 import { SignIn } from './pages/sign-in/SignIn'
@@ -15,25 +17,26 @@ function App() {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
-  useEffect( () => {
-    const token = localStorage.getItem( "token" );
-    console.log( token );
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token);
 
     const settings = {
-      headers : {
-        something : token
+      headers: {
+        something: token
       }
     }
-    axios.get( 'http://localhost:8000/api/validate', settings )
-      .then( response => {
+    axios.get('http://localhost:8000/api/validate', settings)
+      .then(response => {
+        console.log(response)
         const loadUserInfo = response.data.decoded;
-        setUser( loadUserInfo );
+        setUser(loadUserInfo);
       })
-      .catch( err => {
-        navigate( '/' );
+      .catch(err => {
+        navigate('/');
       });
   }, [])
-  
+
   return (
     <div className="App">
       <UserContext.Provider value={{ user, setUser }}>

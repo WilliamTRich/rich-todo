@@ -10,6 +10,8 @@ const Nav = () => {
     const navigate = useNavigate()
 
     const clickHandler = () => {
+        localStorage.removeItem('token')
+        setUser({})
         navigate('/')
     }
 

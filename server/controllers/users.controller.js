@@ -27,7 +27,8 @@ module.exports.registerUser = async (req, res) => {
                     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
                     return res.json({
                         accessToken,
-                        userId: userExist._id
+                        userId: user.userId,
+                        userName: user.userName
                     })
                 })
                 .catch(err => res.status(400).json(err))
@@ -51,7 +52,8 @@ module.exports.loginUser = async (req, res) => {
                 const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
                 return res.json({
                     accessToken,
-                    userId: userExist._id
+                    userId: userExist._id,
+                    userName: userExist.userName
                 })
             } else {
                 return res
@@ -90,9 +92,7 @@ module.exports.deleteUser = (req, res) => {
 }
 
 module.exports.validateToken = (req, res) => {
-    console.log(req.headers);
     jwt.verify(req.headers.something, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-        console.log("Error", err)
         if (!err) {
             res.status(200).json({ decoded });
         }
